@@ -1,0 +1,75 @@
+<!--{include header}-->
+<script type="text/javascript" src="{$HttpPath}static/js/user.js"></script>
+ <div class="main">
+
+ <div class='process'  style='height:50px;'>
+ <div class="title">{$web_title}</div>
+
+
+ </div>
+
+
+
+
+<div class="info">
+<form  action='bind2.php' method='post'>
+
+<div class='line'>
+
+<span class="title"><span class='must'>*</span>用户类型:</span>
+
+      <select name='group' id='group'>
+<option value=''>请选择</option>
+
+      <!--{loop $user_group $index $value}-->
+<option value='{$index}'  >{$value}</option>
+
+<!--{/loop}-->
+
+      </select>
+
+
+</div>
+
+
+<div class='line'>
+
+<div style='padding-left:253px;'>
+<input type="submit" class='btn01' value='下一步'  onclick="return click_sub();">
+</div></div>
+</form>
+</div>
+
+
+
+</div>
+
+
+
+</div>
+
+<script>
+function click_sub(){
+
+
+
+if(document.getElementById('group').value==''){
+
+
+	window.wxc.xcConfirm('请选择用户类型！',window.wxc.xcConfirm.typeEnum.warning);
+
+
+	return  false;
+
+}
+
+}
+
+</script>
+
+
+
+
+
+
+<!--{include footer}-->

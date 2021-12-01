@@ -1,0 +1,312 @@
+ .page{
+      font-size: 14px;
+      background-color: #FAFAFA;
+      height: 590px;
+      display: inline-block;
+      clear: both;
+      overflow-y: scroll;
+      border-radius: 8px;
+  }
+  .page::-webkit-scrollbar,textarea::-webkit-scrollbar{
+        display: none;
+    }
+  .titles{
+      font-size: 14px;
+      font-weight: 600;
+      padding-left: 10px;
+      color: #3c4ea0;
+      height: 30px;
+      line-height: 30px;
+      margin-top: 10px;
+      clear: both;
+  }
+  .titles:first-child{
+      margin-top: 0px;
+  }
+   .titles .right{
+       float: right;
+       display: inline-block;
+   }
+   .titles .right .btn{
+       height: 20px;
+       line-height: 20px;
+       padding: 0px 5px;
+       margin: 0px 5px;
+       text-align: center;
+       background-color: #3388ff;
+       display: inline-block;
+       color: #fff;
+     font-size: 14px;
+         cursor: pointer;
+   }
+  .lines{
+      margin: 5px 0px;
+      padding: 5px 5px;
+      clear:both;
+      background-color: #FFF;
+      min-height: 30px;
+      line-height: 30px;
+      width: calc(100% - 10px);
+      display: table;
+      table-layout: fixed;
+  }
+  .lines > view{
+      display: inline-block;
+  }
+  .lines > view:first-child{
+      width: 50px;
+      text-align: center;
+      font-weight: 600;
+         color: #3c4ea0;
+         vertical-align: top;
+  }
+  .lines > view:nth-child(2){
+      width: calc(100% - 51px);
+  }
+  .lines > view:nth-child(2) .balls{
+      display: inline-block;
+      width: 10%;
+      text-align: center;
+  }
+ .lines > view:nth-child(2) .balls > span{
+    
+          display: inline-block;
+          text-align: center;
+          font-size: 14px;
+          line-height: 25px;
+          height: 25px;
+          width: 25px;
+          border-radius: 50%;
+          border: 1px solid #cec7c7;
+          color: #666;
+          background: -webkit-linear-gradient(top,#fff,#d8d8d8);
+          background: linear-gradient(to bottom,#fff,#d8d8d8);
+          filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#d8d8d8', GradientType=0);
+          box-shadow: 0 2px 4px 0 #d8d8d8;
+          cursor: pointer;
+       
+      
+  }
+ .lines > view:nth-child(2) .balls > span.active {
+      background: -webkit-linear-gradient(left top, #3388ff , #2319dc);
+      background: -o-linear-gradient(bottom right, #3388ff, #2319dc);
+      background: -moz-linear-gradient(bottom right, #3388ff, #2319dc);
+      background: -webkit-linear-gradient(top left, #3388ff , #2319dc);
+      background: linear-gradient(to bottom right, #3388ff , #2319dc);
+      color: #fff;
+      font-weight: 600;
+  }
+   .lines > view:nth-child(2) .button{
+       display: inline-block;
+       text-align: center;
+   }
+   .lines > view:nth-child(2).nomore{
+     padding-top: 5px;
+       max-height:28px ;
+       overflow: hidden;
+   }
+    .lines > view:nth-child(2) .button > span{
+        height: 20px;
+        line-height: 20px;
+        border: 1px #666 solid;
+        color: #666;
+        width: 85%;
+        display: inline-block;
+        border-radius: 5px;
+        font-size: 12px;
+            cursor: pointer;
+    }
+     .lines > view:nth-child(2) .button > span.active{
+         background-color: #2319DC;
+         color: #fff;
+          border: 1px #2319DC solid;
+          
+     }
+    
+  .lines .input{
+      width: calc(100% - 12px);
+      border: 1px #eee solid;
+      border-radius: 5px;
+      padding: 0px 5px;
+      height: 25px;
+      line-height: 25px;
+      font-size:12px;
+      vertical-align: middle;
+      background-color: #fff;
+  }
+  
+   .lines  .textarea{
+      width: calc(100% - 12px);
+      border: 1px #eee solid;
+      border-radius: 5px;
+      padding: 3px 5px;
+    
+      max-height: 150px;
+      line-height: 20px;
+       height: 20px;
+      font-size:12px;
+      vertical-align: middle;
+      margin-top: 5px;
+      display: block;
+      background-color: #fff;
+ 
+    
+  }
+  .lines .line1{
+      display: block;
+      width: 100%;
+      margin-top: 5px;
+      height: 30px;
+      line-height: 30px;
+  }
+  .lines .line1 > view{
+      display: inline-block;
+      width: 25%;
+      text-align: center;
+  }
+   .lines .line1 > view > span{
+       height: 25px;
+       line-height: 25px;
+       width: 50px;
+       background-color: #3388FF;
+       color: #fff;
+       text-align: center;
+       display: inline-block;
+   }
+  .balltools{
+      margin-top: 10px;
+      width: 100%;
+      position:relative ;
+      height: 42px;
+      display: table;
+      table-layout: fixed;
+      text-align: center;
+      padding: 0px 0px;
+  }
+  .balltools .bg{
+      width: 90%;
+      height: 8px;
+      position: absolute;
+      left:5%;
+      bottom: 0px;
+      background-image: url(../../static/img/tools_line.png);
+      background-size: 100% 100%;
+      display: inline-block;
+  }
+  .balltools > view{
+      display: table-cell;
+      text-align: center;
+      width: 12.8%;
+  }
+  .balltools > view > view{
+      height:25px;
+      line-height: 25px;
+      width: 25px;
+    background: -webkit-linear-gradient(left top, #ddd , #fafafa);
+    background: -o-linear-gradient(bottom right,#ddd , #fafafa);
+    background: -moz-linear-gradient(bottom right, #ddd , #fafafa);
+    background: linear-gradient(to bottom right, #ddd , #fafafa);
+    color: #333;
+    cursor: pointer;
+    box-shadow: 0 2px 4px 0 #d8d8d8;
+      display: inline-block;
+      text-align: center;
+     font-weight: 600;
+     border-radius: 5px;
+  }
+    .balltools > view > view.active{
+    background: -webkit-linear-gradient(left top, #f05c36 , #ff7e00);
+    background: -o-linear-gradient(bottom right, #f05c36, #ff7e00);
+    background: -moz-linear-gradient(bottom right, #f05c36, #ff7e00);
+    background: linear-gradient(to bottom right, #f05c36 , #ff7e00);
+    color: #fff;
+    }
+  
+  .bottom{
+      position: fixed;
+      z-index: 100; 
+      left: 0px;
+      width: 100%;
+      bottom: 0px;  
+      background-color: #fff;
+      border-bottom-right-radius: 8px;
+       border-bottom-left-radius: 8px;
+       overflow: hidden;
+  }
+  .bottom > view{
+      display: inline-block;
+      width: 100%;
+      clear: both;
+  }
+  .bottom .input_area{
+      height: 90px;
+      padding: 5px 5px;
+      width:calc(100% - 10px);
+      background-color: #fff;
+  }
+  .bottom .input_area > view{
+      display: inline-block;
+      vertical-align: top;
+  }
+   .bottom .input_area > view:first-child{
+       width: calc(100% - 50px);
+   }
+   .bottom .input_area > view:last-child{
+       width: 50px;
+       text-align: right;
+   }
+      .bottom .input_area > view:last-child > button{
+          margin: 5px 0px;
+          display: inline-block;
+          height: 40px;
+          line-height: 40px;
+          width: 40px;
+          background-color: #2319DC;
+          color: #fff;
+          font-size: 16px;;
+          clear: both;
+          vertical-align:top ;
+      }
+    .bottom .textarea{
+        border: 1px #eee solid;
+        padding: 2px 5px;
+        width: calc(100% - 12px);
+        font-size: 10px;
+        line-height: 20px;
+        height: 90px;
+        background-color: #fff;
+        border-radius: 5px;
+    }
+     .bottom .textarea::-webkit-scrollbar{
+          display: none;
+      }
+    .bottom .count_area{
+        background-color: #fbfbfb;
+        height: 35px;
+        line-height: 35px;
+        text-align: center;
+          color: #3c4ea0;
+          font-weight: 700;
+    }
+    .bottom .btns{
+        height: 50px;
+        line-height: 50px;
+        text-align: center;
+    }
+    .bottom .btns >view{
+        display: inline-block;
+        width: 50%;
+        height: 50px;
+        line-height: 50px;
+        font-size: 16px;
+        text-align: center;
+        cursor: pointer;
+    }
+    .bottom .btns >view:first-child{
+        background-color: #2319DC;
+        color: #fff;
+    }
+    .bottom .btns >view:last-child{
+        background-color: #eee;
+        color: #000;
+    }

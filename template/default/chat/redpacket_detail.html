@@ -1,0 +1,241 @@
+
+
+<!--{include header}-->
+<link rel="stylesheet" href="{$HttpTemplatePath}static/css/group.css?v={$cachekey}" type="text/css" media="screen" />
+<script src="/static/js/group.js?v={$cachekey}"></script>
+
+
+
+
+
+<div class="page">
+
+    <img src="/static/images/repacket-top.png" class="topimg"></img>
+
+    <div class="info">
+        <view class="redpick-info">
+            <div class="redpick-info-avatar">
+
+                <img src="{$sender['avatar']}" style="border-radius:6px;" />
+                <span class="redpick-info-nickname">{$sender['nickname']}</span>
+                <span class="redpick-info-nickname">的红包</span>
+
+            </div>
+            <!--{if $redpacket['money']>0}-->
+            <dvic class="redpick-info-title">
+
+                <div  class="money" style="color:#d0ac72;">
+                    <span style='font-size: 52px;font-weight: 600;'>{$redpacket['money']}</span>
+                    <span style='font-size: 16px;'>元</span>
+                </div>
+
+            </dvic>
+            <!--{/if}-->
+        </view>
+
+
+        <div class="scrollview">
+            <!--{if $redpacket['isgroup']==1 && $redpacket['status']==2}-->
+            <div  class='tips' >
+
+                共有<span class='num'>${count($userids)}</span>个红包,
+                <span class='num'>{$lasttime}</span>被抢光
+            </div>
+            <!--{/if}-->
+
+            <!--{loop $userids $index $value}-->
+            <div class="friends" >
+
+                <view class="avatar">
+                    <img src="{$value['avatar']}">
+                </view>
+                <view class="showname">
+                    <div >
+                      {$value['nickname']}
+
+                        <!--{if $redpacket['isgroup']==1 && $redpacket['status']==2 && $value['money']==$max}-->
+                        <span  style='color: #FF4400;margin-left: 5px;font-size: 14px;' >最佳</span>
+                        <!--{/if}-->
+                        <view class="money">{$value['money']}元</view>
+                    </div>
+
+                    <div class="time">
+
+                       ${date('Y-m-d H:i:s',$value['time'])}
+                    </div>
+
+                </view>
+
+            </div>
+            <!--{/loop}-->
+
+        </div>
+
+    </div>
+</div>
+
+<script>
+
+</script>
+<style>
+    .page{
+        padding: 0px 0px;
+        font-size: 14px;
+        background-color: #FFF;
+    }
+    .topimg{
+        position: fixed;
+        width: 100%;
+        height: 33vw;
+        display: inline-block;
+        left: 0px;
+        top:0px;
+    }
+    .topmenu{
+        position: fixed;
+        width: calc(100% - 20px);
+        height:50px;
+        line-height: 50px;
+        display: inline-block;
+        left: 0px;
+        padding-left: 10px;
+        z-index: 1;
+        text-align: left;
+    }
+    .info{
+        position: fixed;
+        width: 100%;
+        height: auto;
+        display: inline-block;
+        left: 0px;
+        top:34vw;
+        z-index: 1;
+        text-align: center;
+    }
+
+    .scrollview{
+        position: fixed;
+        width: calc(100% - 10px);
+        height: 60vh;
+        display: inline-block;
+        left: 5px;
+        bottom:0px;
+        z-index: 2;
+        text-align: center;
+        overflow-y: scroll;
+    }
+    .scrollview::-webkit-scrollbar{
+        display: none;
+    }
+    .tips{
+        height: 30px;
+        line-height: 30px;
+        color: #666;
+        font-size: 14px;
+        padding-left: 5px;
+        text-align: left;
+    }
+    .tips .num{
+        color:#2319dc;
+        font-weight: 600;
+        margin: 0px 2px;
+    }
+
+    .friends{
+        padding: 5px 0px;
+
+        height: 35px;
+        line-height: 35px;
+        display: table;
+        table-layout: fixed;
+        width: calc(100% - 0px);
+
+    }
+    .friends .avatar{
+        display: table-cell;
+        width: 60px;
+        text-align: left;
+    }
+    .friends .avatar  img{
+        height: 50px;
+        width: 50px;
+        border-radius: 5px;;
+        vertical-align: middle;
+    }
+    .friends .showname {
+        text-align:left;
+        display: table-cell;
+        font-size: 16px;
+
+        color: #111;
+        line-height: 25px;;
+        vertical-align: middle;
+        margin: 0px 0px;
+        padding: 0px 0px;
+        border-bottom: 1px #EFEFEF solid;
+    }
+    .friends .showname .money{
+        display: inline-block;float: right;
+
+    }
+
+    .friends .showname > view{
+        width: 100%;
+        height: 25px;
+        line-height: 25px;
+    }
+    .friends .showname .time{
+        color: #666;
+        text-align: left;
+        font-size: 12px;
+    }
+
+    .redpick-info{
+        position: absolute;
+        left:0;
+        top: 0;
+        width: 100%;
+        color: #666;
+        border-top-left-radius:10px ;
+    }
+    .redpick-info-avatar{
+        display: block;
+        text-align: center;
+
+        font-size:14px;
+    }
+    .redpick-info-nickname{
+        display: inline-block;
+        max-width: 100px;
+
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+
+    }
+    .redpick-info-nickname{
+        vertical-align: middle;
+        font-size:14px;
+    }
+    .redpick-info img{
+        width: 30px;
+        height:30px;
+        vertical-align: middle;
+    }
+    .redpick-info-title{
+        text-align: center;
+        font-size: 20px;
+        margin-top: 30px;
+    }
+    .redpick-over{
+
+        max-width: 80%;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        display: block;
+        margin: 0px auto;
+    }
+</style>
+
+<!--{include footer}-->

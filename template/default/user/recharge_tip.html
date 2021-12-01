@@ -1,0 +1,51 @@
+<!--{include header}-->
+      <div class='user_mian' style='line-height:25px;'>
+
+           <ul >
+
+
+              <li>开户人姓名：
+          {$bank['realname']}
+
+           </li>
+
+              <li>汇款账号：
+          {$bank['number']}
+
+           </li>
+
+
+
+        </ul>
+           <!--{if $bank['qrcode']}-->
+                     <div  style='text-align:center;'>
+                     <div style='word-break:break-all;display:block;width:100%;line-height:25px;'>
+
+                     扫描二维码付款<br>如无法识别，请关注微信公众账号赶程网，进入网站<br>
+                     <div style='color:#ff0000;'>汇款之后请记得填写汇款凭据</div>
+
+                     </div>
+      <img src="{$HttpPath}{$bank['qrcode']}" style='width:80%;margin:0 auto;' >
+
+           </div>
+
+<input type='button' class='btn100' value='请识别二维码付款'   onclick="location.href='recharge_info.php?id={$id}'">
+
+<!--{else}-->
+
+<input type='button' class='btn100' value='请向账户付款'   onclick="location.href='recharge_info.php?id={$id}'">
+
+
+           <!--{/if}-->
+
+
+
+
+
+
+
+
+        </div>
+
+
+<!--{include footer}-->

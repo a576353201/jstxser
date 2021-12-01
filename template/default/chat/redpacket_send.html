@@ -1,0 +1,328 @@
+
+
+<!--{include header}-->
+<link rel="stylesheet" href="{$HttpTemplatePath}static/css/group.css?v={$cachekey}" type="text/css" media="screen" />
+<script src="/static/js/group.js?v={$cachekey}"></script>
+
+
+<div class="page">
+    <view class="line">
+        <view class="left">
+
+            <!--{if $isgroup==1}-->  <view class="pin"  >拼</view><!--{/if}-->  <span id="money_title">总金额</span>
+        </view>
+        <view class="right">
+
+            <input class="input" id="money" type="digit"  placeholder="0.00" oninput="listen_money(this.value)" maxlength="6" />
+            元
+
+        </view>
+    </view>
+
+
+
+        <!--{if $isgroup==1}-->
+        <view class="tips">
+          <span id="type_1">
+                  当前为拼手气红包，<span class='text' onclick="change_type(2)">改为普通红包</span>
+          </span>
+
+
+            <span id="type_2" style="display: none">
+                当前为普通红包，<span class='text'  onclick="change_type(1)">改为拼手气红包</span>
+            </span>
+
+        </view>
+
+        <view class="line">
+            <view class="left">
+                红包个数
+            </view>
+            <view class="right">
+
+                <input class="input" type="text"  placeholder="填写个数" oninput="listen_num(this.value)"  />个
+
+            </view>
+        </view>
+        <view class="tips" style="color: #666;">
+            本群共<span class='text'>{$group['people_count']}</span>人
+        </view>
+       <!--{/if}-->
+
+
+    <view class="line">
+
+        <input class="input1" placeholder="{$system['redpacket_title']}" id="title" value=""/>
+
+    </view>
+
+    <view class="money_show">
+        <view class="icon">￥</view>
+        <view class="title" id="moneytotal">0.00</view>
+    </view>
+
+    <view class="sendbtn" onclick='subsend()'>塞进红包</view>
+
+    <div class="bottom">
+        未领取的红包，将在{$system['redpacket_backtime']}小时退回到您的账户
+    </div>
+    <payment v-if="showpay" @payresult='payresult' :payinfo="payinfo" title="支付" :getmoney="moneytotal" :fix='fix' type="redpacket"  :id="id" @close="showpay=false;"></payment>
+
+</div>
+
+
+<script>
+    var redtype=1;
+    var rednum=0;
+    var isgroup={$isgroup};
+    if(isgroup==0) {
+        redtype=2;
+    rednum=1;
+    }
+    var moneytotal='0.00';
+    var issend=false;
+    function listen_money(value) {
+        if(redtype==1) var res = value;
+        else var res = value*rednum;
+
+        if(res>{$system['redpacket_min']}) moneytotal=parseFloat(res).toFixed(2);
+        else moneytotal='0.00';
+
+        $('#moneytotal').html(moneytotal);
+        if(moneytotal>0 && rednum>0){
+            $('.sendbtn').addClass('active');
+            issend=true;
+        }
+        else {
+            $('.sendbtn').removeClass('active');
+            issend=false
+        }
+    }
+    function  listen_num(v){
+
+   rednum=parseInt(v);
+
+        listen_money($('#money').val())
+
+    }
+function  change_type(type){
+  redtype=type;
+  if (type==1){
+     $('#money_title').html("总金额");
+     $('#type_1').show();
+      $('#type_2').hide();
+      $('.pin').show();
+  }
+  else{
+      $('#money_title').html("单个金额")
+      $('#type_2').show();
+      $('#type_1').hide();
+      $('.pin').hide();
+  }
+    listen_money($('#money').val())
+}
+   function subsend(){
+
+        if(!issend) return false;
+        if(parseFloat(moneytotal)<0.01){
+
+            parent.layer.msg("请输入红包金额",{ type: 1, anim: 2 ,time:1000});
+            return false;
+        }
+        if(parseInt(this.num)<1){
+            parent.layer.msg("请输入红包个数",{ type: 1, anim: 2 ,time:1000});
+            return false;
+        }
+        if(parseFloat(moneytotal)/parseInt(rednum)<0.01){
+
+            parent.layer.msg("红包不够分了",{ type: 1, anim: 2 ,time:1000});
+            return false;
+        }
+        if(isgroup==1 &&  parseInt(rednum) > parseInt({$group['people_count']})){
+
+            parent.layer.msg("红包个数不能大于群总人数",{ type: 1, anim: 2 ,time:1000});
+            return false;
+        }
+        if(parseFloat(moneytotal)<parseFloat({$system['redpacket_min']}) || parseFloat(moneytotal)>parseFloat({$system['redpacket_max']})){
+            uni.showToast({
+                title:'红包金额范围：{$system['redpacket_min']}-{$system['redpacket_min']}元',
+                icon:'none'
+            })
+            return false;
+        }
+        if(parseFloat(moneytotal)>parseFloat({$user['money1']})){
+            var index=  layer.confirm("您的可用余额不足，请先去充值！", {
+                title:'可用余额不足',
+                time: 20000, //20s后自动关闭
+                btn: ['立即充值', '取消']
+            },function () {
+                //
+                parent.click_recharge();
+
+                layer.close(index);
+                var index = parent.layer.getFrameIndex(window.name); parent.layer.close(index);
+            },function () {
+
+            });
+
+            return false;
+        }
+        if($('#title').val()) var title=$('#title').val();
+        else var title='{$system['redpacket_title']}';
+       var payinfo={isgroup:isgroup,redtype:redtype,permoney:$('#money').val(),num:rednum,title:title,chatid:{$id},summoney:moneytotal};
+       var info='';
+       for(var ii in payinfo){
+           info+="&"+ii+"="+payinfo[ii];
+       }
+
+       var index= parent.layer.open({
+           type: 2,
+           title: false,
+           shadeClose: true,
+           shade: 0.6,
+           area: ['300px','300px'],
+           content: '/user/pay.php?from=layer&type=redpacket&id={$id}&info='+info
+
+       });
+
+       var index = parent.layer.getFrameIndex(window.name); parent.layer.close(index);
+    }
+
+</script>
+<style>
+    view{
+        padding: 0px 0px;
+        margin: 0px 0px;
+        display:block;
+    }
+    body{
+        background-color: #FAFAFA;
+        font-size: 14px;
+        padding-top: 1px;  display: inline-block;
+        border-radius: 10px;
+
+        overflow: hidden;
+    }
+    .page .tips{
+        height: 22px;
+        line-height: 22px;
+        text-align: left;
+        font-size: 12px;
+        padding: 0px 10px;
+
+    }
+    .page .tips .text{
+        display: inline-block;
+        color: #c69848;
+        cursor: pointer;
+    }
+    .page .line{
+        background-color: #FFFFFF;
+        margin-top: 15px;
+        height: 50px;
+        line-height: 50px;
+        padding: 0px 10px;;
+        width:calc(100% - 20px);
+        clear: both;
+        vertical-align: middle;
+    }
+    .page .line .left{
+        width:90px;
+        display: inline-block;
+        text-align: left;
+        vertical-align: top;
+    }
+    .page .line .right{
+        width: calc(100% - 100px);
+        vertical-align: top;
+        display: inline-block;
+        text-align: right;
+    }
+    .page .line .right .input{
+        height: 30px;
+        line-height: 30px;
+        width: 70px;
+        padding: 0px 5px;
+
+        text-align: left;
+        display: inline-block;
+        vertical-align: middle;
+        border:1px solid #eee;
+        border-radius: 5px;
+    }
+    .page .line .input1{
+        height: 30px;
+        line-height:30px;
+        width: calc(100% - 10px);
+        padding: 0px 5px;
+        border:1px solid #eee;
+        border-radius: 5px;
+        text-align: left;
+        display: inline-block;
+        vertical-align: middle;
+   margin-top: 8px;;
+    }
+
+    .pin{
+        height: 18px;
+        width: 18px;line-height: 18px;
+        text-align: center;
+        color:#FFF;
+        background-color: #c69848;
+        border-radius: 3px;
+        display: inline-block;
+        margin-right: 5px;
+    }
+
+    .money_show{
+        margin-top: 15px;
+        height: 50px;
+        line-height: 50px;
+        padding: 0px 10px;;
+        text-align: center;
+
+    }
+    .money_show .icon{
+        font-size: 14px;
+        color: #333;
+        display: inline-block;
+    }
+    .money_show .title{
+        font-size: 34px;
+        font-weight: 700;
+        color: #000;
+        display: inline-block;
+    }
+
+    .sendbtn{
+        height: 40px;
+        line-height: 40px;
+        width: 240px;
+        display: block;
+        margin: 15px auto;
+        border: 0px;
+        color:#fff;
+        background-color:#e1e1e1;
+        font-size:16px;
+        font-weight:600;
+        text-align:center;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    .sendbtn.active{
+        background-color: #2319DC;
+    }
+    .bottom{
+        height: 30px;
+        line-height: 30px;
+        color: #666;
+        text-align: center;
+        position: fixed;
+        left: 0px;
+        bottom: 0px;
+        width: 100%;
+    }
+
+</style>
+
+<!--{include footer}-->

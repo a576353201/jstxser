@@ -1,0 +1,276 @@
+
+
+<!--{include header}-->
+<link rel="stylesheet" href="{$HttpTemplatePath}static/css/group.css?v={$cachekey}" type="text/css" media="screen" />
+<script src="/static/js/group.js?v={$cachekey}"></script>
+
+
+
+
+
+<div class="bag" >
+
+    <div class="redpick-info">
+        <div class="redpick-info-avatar">
+
+                <img src="{$sender['avatar']}" style="border-radius:6px;" />
+                <span class="redpick-info-nickname">{$sender['nickname']}</span>
+                <span class="redpick-info-nickname">的红包</span>
+
+
+        </div>
+        <div class="redpick-info-title" >
+            <!--{if  $content['isopen']==0}-->
+
+                {$content['title']}
+
+            <!--{else}-->
+            <!--{if $content['money']>0}-->
+                <div class="money">
+                    <span style='font-size: 16px;'>￥</span><span style='font-size: 52px;font-weight: 600;'>{$content['money']}</span>
+                </div>
+               <!--{else}-->
+                    手慢了，红包派完了
+
+                <!--{/if}-->
+            <!--{/if}-->
+
+        </div>
+    </div>
+
+    <!--{if $content['isopen']==0}-->
+
+    <div id="openpacket" class="stick" onclick="goDetail()" >
+        <span class="rmb">開</span>
+    </div>
+    <!--{else}-->
+    <div class="error-text" onclick="location.href='redpacket_detail.php?id={$msg['id']}'" style="text-align: center">
+        看看大家的手气
+    </div>
+
+    <!--{/if}-->
+
+
+
+
+</div>
+
+<script>
+    var banknum='{$user['banknum']}'
+    function goDetail() {
+        if(parseInt(banknum)<1){
+            parent.layer.msg("绑定银行卡后才可以枪红包",{ type: 1, anim: 2 ,time:1000});
+            return false;
+        }
+      document.getElementById('openpacket').className='stick opening';
+     setInterval(function(){
+         if( document.getElementById('openpacket').className=='stick')
+         document.getElementById('openpacket').className='stick opening';
+         else
+       document.getElementById('openpacket').className='stick';
+        },500)
+
+        var postdata={userid:'{$_SESSION['id']}',id:'{$content['id']}'}
+        $.get("../api/group.php?act=get_redpacket",postdata, function(result){
+           var res=JSON.parse(result);
+           if(res.code==200){
+              if(res.data>0){
+
+                  if({$content['isgroup']}==1){
+                      var data = {
+                          user_id: '{$_SESSION['id']}',
+                          tip_uid: '{$msg['sender']['id']}',
+                          type: 'sendtips',
+                          group_id: '{$msg['group_id']}',
+                          content: '{$user['nickname']}领取了您的红包',
+
+                      };
+                  }else{
+                      var data = {
+                          user_id: '{$_SESSION['id']}',
+                          tip_uid: '{$msg['sender']['id']}',
+                          touid: '{$msg['sender']['id']}',
+                          type: 'sendtips',
+                          group_id: '{$msg['group_id']}',
+                          content: '{$user['nickname']}领取了您的红包',
+                      }
+                      parent.send_data(JSON.stringify(data));
+                  }
+
+              }
+               location.reload();
+           }
+
+
+        });
+
+
+    }
+    
+</script>
+<style>
+    .mask {
+        width: 100%;
+        height: 100vh;
+        overflow: hidden;
+        z-index: 10;
+        position: fixed;
+        background: rgba(255,255,255,0.5);
+        left: 0;
+        top: 0;
+        border-top-left-radius:10px ;
+    }
+
+
+    .bag:before {
+        content: '';
+        position: absolute;
+        top: -30%;
+        left: 50%;
+        z-index: 0;
+        width: 200%;
+        height: 100%;
+        border-radius: 100%;
+        background-color: #F45E4D;
+        box-shadow: 0px 4px 10px 0px rgba(0,0,0,0.2);
+        transform: translateX(-50%);
+        border-top-left-radius:10px ;
+    }
+
+    .bag .header {
+        position: absolute;
+        left: 0;
+        top: 45%;
+        width: 100%;
+        text-align: center;
+        z-index: 1;
+        color: #fff;
+        font-size: 40px;
+        opacity: .9;
+    }
+
+    .bag .header .subtitle {
+        font-size: 16px;
+    }
+
+    .bag .header .num {
+        color: #FEED4C;
+    }
+
+    .bag .stick {
+        position: relative;
+        z-index: 1;
+        width: 70px;
+        height: 70px;
+        text-align: center;
+     
+        margin: 0 auto;
+        margin-top:80%;
+        border-radius: 9999px;
+        background-color: #EBCD99;
+        box-shadow: 0 0 10px 0 rgba(0,0,0,0.4);
+        cursor: pointer;
+    }
+
+    .bag .stick .rmb {
+        font-size:36px;
+        line-height: 70px;
+        color: #3B3A37;
+    }
+
+    .bag .detail-btn {
+        display: block;
+        font-size:`16px;
+        color: #fff;
+    }
+
+    .message {
+        font-size:14px;
+        text-align: center;
+        color: #eee;
+    }
+
+    .bag .money{
+        color:#fff;
+    }
+
+    .error-text{
+        position: absolute;
+        left: 50%;
+        bottom: 4%;
+        transform: translateX(-50%);
+        color: #666;
+        font-size:14px;
+        width: 100%;
+        cursor: pointer;
+    }
+
+
+    .opening {
+        animation: openboom 0.5s;
+    }
+
+    @keyframes openboom {
+
+        /*定义关键帧、scaleDrew是需要绑定到选择器的关键帧名称*/
+        0% {
+            transform: rotateY(0deg);
+        }
+
+
+
+
+        100% {
+            transform: rotateY(360deg);
+        }
+    }
+
+    .redpick-info{
+        position: absolute;
+        left:0;
+        top: 0;
+        width: 100%;
+        color: #F4E4AE;
+        border-top-left-radius:10px ;
+    }
+    .redpick-info-avatar{
+        display: block;
+        text-align: center;
+        margin-top:15%;
+        font-size:14px;
+    }
+    .redpick-info-nickname{
+        display: inline-block;
+        max-width: 100px;
+
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+
+    }
+    .redpick-info-nickname{
+        vertical-align: middle;
+        font-size:14px;
+    }
+    .redpick-info img{
+        width: 30px;
+        height:30px;
+        vertical-align: middle;
+    }
+    .redpick-info-title{
+        text-align: center;
+        font-size: 20px;
+        margin-top: 30px;
+    }
+    .redpick-over{
+
+        max-width: 80%;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        display: block;
+        margin: 0px auto;
+    }
+</style>
+
+<!--{include footer}-->

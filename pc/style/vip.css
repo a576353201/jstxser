@@ -1,0 +1,321 @@
+.vipgreen {
+    color: #2f9945
+}
+.viporg {
+    color: #ff8728
+}
+.viphui {
+    color: #999
+}
+.vipblue {
+    color: #64c8ca
+}
+.vipblue01 {
+    color: #3984e5
+}
+.qqqun01 {
+    color: #F00;
+    margin: 0 10px;
+}
+.qqqun02 {
+    margin: 0 10px;
+}
+.vipred {
+    color: #ff8728
+}
+.vipzis {
+    color: #c562e6
+}
+.viphuibg01 {
+    background: #f9f9f9;
+}
+.viphuibg02 {
+    background: #eee;
+}
+.vipzisbg {
+    background: #c562e6;
+}
+.orgbg {
+    background: #ff8728;
+}
+.viphuibg {
+    background: #b4b4c0;
+}
+.vipbluebg {
+    background: #64c8ca;
+}
+.vipredbg {
+    background: #f4614f;
+}
+.vipblack {
+    color: #606266;
+    font-size: 15px
+}
+.viphui {
+    color: #999;
+}
+.vipMainBox, .vipMainBox .vipContent .tabbtnBox {
+    width: 1200px;
+    margin: 20px auto;
+    background: #fff;
+}
+.vipMainBox {
+    box-shadow: 0 1px 3px rgba(27,95,160,.1);
+}
+
+.btn1{
+    display: inline-block;
+    cursor: pointer;
+    height: 30px;
+    line-height: 30px;
+    padding: 0 20px;
+    text-align: center;
+
+    margin: 0px 5px;
+    background-color: #ff8728;
+    color: #fff !important;
+    font-size: 14px;
+    border: 0px;
+    border-radius: 15px;
+}
+.btn2{
+    display: inline-block;
+    cursor: pointer;
+    height: 30px;
+    line-height: 30px;
+    padding: 0 20px;
+    text-align: center;
+
+    margin: 0px 5px;
+    background-color: #c562e6;
+    color: #fff !important;
+    font-size: 14px;
+    border: 0px;
+    border-radius: 15px;
+}
+.vipMainBox .vipTopbg {
+    width: 1200px;
+    height: 111px;
+    line-height: 111px;
+    color: #fefef9;
+    text-shadow: #ef7e0d 5px 3px 6px;
+    font-weight: 700;
+    font-size: 32px;
+    text-align: center;
+
+    margin-top: 20px;
+    margin-bottom: 45px;
+}
+.vipMainBox .vipContent {
+    width: 1200px;
+
+    margin: auto;
+    text-align: center;
+}
+.vipListTop {
+    position: relative
+}
+.vipMainBox .vipContent .tabbtnBox {
+    width: 324px;
+    height: 70px;
+}
+.vipMainBox .vipContent .tabbtnBox .tabbtn, .vipMainBox .vipContent .tabbtnBox .tabbtn.active {
+    width: 150px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    border-radius: 30px;
+    margin-right: 10px;
+    display: block;
+    float: left;
+    border: 1px solid #e5e5e5;
+    color: #333;
+}
+.vipMainBox .vipContent .tabbtnBox .tabbtn.active {
+    background: #ff8728;
+    color: #fff;
+    font-weight: bold;
+    border: 1px solid #ff8728;
+    text-decoration-line: none;
+}
+.vipMainBox .vipContent .vipListBox i {
+    width: 70px;
+    height: 70px;
+    display: block;
+    background: url("../img/recommond.png") no-repeat;
+    position: absolute;
+    top: 0;
+    left: 0
+}
+.vipMainBox .vipContent .vipListBox {
+    width: 1060px;
+    margin: auto;
+    margin-bottom: 55px;
+}
+.vipMainBox .vipContent .vipListBox ul {
+    min-height: 656px;
+    margin-bottom: 30px;
+}
+.vipMainBox .vipContent .vipListBox li {
+    width: 340px;
+    min-height: 735px;
+    box-shadow: 0px 3px 5px #e5e5e5;
+    float: left;
+    margin-right: 20px;
+}
+.vipMainBox .vipContent .vipListBox li:last-child {
+    margin-right: 0;
+}
+.vipMainBox .vipContent .vipListBox li .vipListTop {
+    width: 340px;
+    height: 220px;
+    color: #fff;
+}
+.vipMainBox .vipContent .vipListBox li h3 {
+    font-size: 24px;
+    padding-top: 30px;
+}
+.vipMainBox .vipContent .vipListBox li .sec {
+    padding: 25px 20px;
+    font-size: 14px;
+    text-align: left;
+    line-height: 20px;
+}
+.vipMainBox .vipContent .vipListBox li .price .fz {
+    font-size: 36px;
+    font-weight: bold;
+}
+.vipMainBox .vipContent .vipListBox li .privilege {
+    min-height: 390px;
+}
+.vipMainBox .vipContent .vipListBox li .privilege p {
+    padding: 15px 6px;
+}
+.vipMainBox .vipContent .vipListBox li .kaitBox .kaitBtn, .vipMainBox .vipContent .vipListBox li .kaitBox .kefBtn, .kefBtn2 {
+    width: 221px;
+    height: 51px;
+    line-height: 51px;
+    margin-top: 10px;
+    color: #fff;
+    font-weight: 600;
+    border-radius: 3px;
+    text-align: center;
+    display: block;
+}
+.kefBtn2 {
+    padding: 10px 25px !important;
+}
+a.kefBtn2:hover {
+    color: #fff
+}
+.vipMainBox .vipContent .vipListBox li .kaitBox .kaitBtn.viphuibg:hover {
+    background: #bfbfce;
+}
+.vipMainBox .vipContent .vipListBox li .kaitBox .kaitBtn.vipbluebg:hover {
+    background: #6ad1d3;
+}
+.vipMainBox .vipContent .vipListBox li .kaitBox .kaitBtn.vipredbg:hover {
+    background: #fa6d5c;
+}
+.vipMainBox .vipContent .vipListBox li .kaitBox .kaitBtn.orgbg:hover {
+    background: #fea719;
+}
+.vipMainBox .vipContent .vipListBox li .kaitBox .kefBtn.vipzisbg:hover {
+    background: #d16af3;
+}
+.vipMainBox .vipContent .vipListBox li .privilege .pinpBtn {
+    width: 80px;
+    height: 27px;
+    line-height: 27px;
+    margin: 8px 6px;
+    color: #666;
+    font-size: 14px;
+    border: 1px solid #e5e5e5;
+    margin-right: 5px;
+    background: #fff;
+    border-radius: 3px;
+    text-align: center;
+    display: block;
+    float: left
+}
+.vipMainBox .vipContent .duibBox, .vipMainBox .vipContent .vipSecBox {
+    width: 1125px;
+    margin: auto;
+    border-top: 1px solid #e5e5e5;
+    padding-bottom: 30px;
+}
+.vipMainBox .vipContent .duibBox p, .vipMainBox .vipContent .vipSecBox p {
+    width: 195px;
+    height: 30px;
+    background: #fff;
+    margin: -15px auto;
+    font-weight: bold;
+    font-size: 20px;
+    margin-bottom: 40px;
+}
+.vipMainBox .vipContent .duibtable {
+    width: 1117px;
+    margin: auto;
+    margin-top: 50px;
+    border: 1px solid #e5e5e5;
+    border-collapse: collapse;
+    margin-bottom: 40px;
+}
+.vipMainBox .vipContent .duibtable th, .vipMainBox .vipContent .duibtable td {
+    width: 198px;
+    line-height: 52px;
+    border: 1px solid #e5e5e5;
+}
+.vipMainBox .vipContent .duibtable th:first-child {
+    color: #666
+}
+.vipMainBox .vipContent .duibtable th {
+    color: #fff;
+    text-align: center;
+    font-size: 17px;
+}
+.vipMainBox .vipContent .duibtable td {
+    text-align: center;
+}
+.vipMainBox .vipContent .vipSecBox p.sectit {
+    width: auto;
+    height: 30px;
+    line-height: 30px;
+    background: #fff;
+    margin: 0 auto;
+    font-weight: normal;
+    font-size: 16px;
+    margin-top: 30px;
+
+    padding-left: 32px;
+    text-align: left;
+    font-size: 16px;
+    color: #ff7000;
+    font-weight: bold;
+}
+.vipMainBox .vipContent .vipSecBox p.sectxt {
+    width: auto;
+    height: 30px;
+    line-height: 30px;
+    height: 30px;
+    text-align: left;
+    background: #fff;
+    margin: 0 20px;
+    font-weight: normal;
+    font-size: 16px
+}
+.vipMainBox .vipContent .vipListBox .nianfBox {
+    width: 700px;
+    height: 922px;
+    margin: auto;
+    margin-bottom: 40px;
+}
+.vipMainBox .vipContent .vipListBox ul {
+    min-height: 755px;
+}
+.vipMainBox .vipContent .vipListBox .nianfBox li .privilege {
+    height: 550px;
+}
+.vipMainBox .vipContent .vipListBox .nianfBox li {
+    height: 890px;
+}

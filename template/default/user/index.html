@@ -1,0 +1,54 @@
+
+
+<!--{include header}-->
+<link rel="stylesheet" href="{$HttpTemplatePath}static/css/user.css?v={$cachekey}" type="text/css" media="screen" />
+
+<ul class="nav1">
+    <li class="active" onclick="change_tab(0);">个人中心</li>
+    <li class="" onclick="change_tab(1);">资料设置</li>
+    <li class="" onclick="change_tab(2);">手机绑定</li>
+
+</ul>
+
+<div class="step">
+
+    <!--{include user/userindex}-->
+</div>
+
+
+<div class="step" style="padding:10px;">
+
+    <!--{include user/profile}-->
+</div>
+
+<div class="step" style="padding:10px;">
+
+    <!--{include user/mobile}-->
+</div>
+
+
+
+<script>
+    var method='login';
+    function change_tab(num) {
+        var step=document.querySelectorAll('.step');
+        var li=document.querySelector('.nav1').querySelectorAll('li');
+        for(var i=0;i<li.length;i++){
+            if(i==num) {
+                li[i].className='active';
+                step[i].style.display='';
+            }
+            else {
+                li[i].className='';
+                step[i].style.display='none';
+            }
+        }
+
+        var index = parent.layer.getFrameIndex(window.name);
+        parent.layer.iframeAuto(index);
+    }
+    change_tab({$step});
+</script>
+
+
+<!--{include footer}-->

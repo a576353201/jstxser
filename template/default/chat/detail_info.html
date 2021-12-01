@@ -1,0 +1,55 @@
+<ul>
+    <li>群号码：</li>
+    <li>{$group['id']}</li>
+</ul>
+<ul>
+    <li>群名称：</li>
+    <li>{$group['name']}</li>
+</ul>
+<ul>
+    <li>群介绍：</li>
+    <li>
+        <!--{if $group['content']}-->
+        {$group['content']}
+        <!--{else}-->
+        <span style="color: #999;line-height: 25px;">
+            该群创建于${date('Y-m-d',$group['addtime'])}，这个群主很懒，什么也没留下
+
+        </span>
+        <!--{/if}-->
+    </li>
+</ul>
+<!--{if count($tags)>0 && $group['tags']}-->
+<ul>
+    <li>群标签：</li>
+    <li >
+        <div class="tagshow">
+            <!--{loop $tags $index $value}-->
+            <span>{$value}</span>
+            <!--{/loop}-->
+
+        </div>
+
+
+    </li>
+</ul>
+
+<!--{/if}-->
+<ul>
+    <li>成员数量：</li>
+    <li>{$group['people_count']}/{$group['people_max']}</li>
+</ul>
+
+<div class="manage_info">
+    <div>群主\管理员：</div>
+    <div>
+        <!--{loop $userlist $index $value}-->
+        <!--{if $value['type']=='owner' || $value['type']=='manager'}-->
+        <span>
+    <img src="{$value['avatar']}" title="{$value['nickname']}" onclick="parent.user_detail({$value['id']})"/>
+    </span>
+        <!--{/if}-->
+        <!--{/loop}-->
+
+    </div>
+</div>

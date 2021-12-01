@@ -1,0 +1,13 @@
+<FilesMatch "\.(bak|inc|lib|sh|tpl|lbi|dwt)$">
+    order deny,allow
+    deny from all
+</FilesMatch>
+
+RewriteEngine On
+#RewriteBase /
+
+# direct one-word access
+RewriteRule ^index\.asp$    index\.php [L]
+RewriteRule ^default.aspx.htm$    index\.php [L]
+RewriteRule  game/(.*)_(.*).html$  game/$1.php?gamekey=$2 [QSA,L]
+RewriteRule  api/lottery/issue/get/(.*)/(.*).json$  api/issue.php?expect=$1&gamekey=$2 [QSA,L]
