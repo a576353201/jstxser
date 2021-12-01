@@ -275,7 +275,7 @@ public  static  $user;
                     return false;
 
                 }
-
+                $row= self::$db->row("select count(*) as num from app_group where user_id like '%{$userid}%'");
 
                 if($user['status']>0){
                     $message=array('type'=>'tips','content'=>array('type'=>'time','text'=>'发送失败，发送太频繁,你已被禁言10分钟'));
