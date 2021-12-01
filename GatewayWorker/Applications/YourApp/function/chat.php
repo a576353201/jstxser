@@ -275,9 +275,11 @@ public  static  $user;
                     return false;
 
                 }
-                $row= self::$db->row("select count(*) as num from app_group where user_id like '%{$userid}%'");
 
-                if($user['status']>0){
+
+                $row= self::$db->row("select count(*) as num from app_chat   where TIMESTAMPDIFF(MINUTE,from_unixtime(`addtime`),now())<=1 and user_id == '{$userid}'");
+
+                if($row['num']>4){
                     $message=array('type'=>'tips','content'=>array('type'=>'time','text'=>'发送失败，发送太频繁,你已被禁言10分钟'));
                     $data['message']=$message;
                     $data1=json_encode(array('type'=>'chat','data'=>$data),JSON_UNESCAPED_UNICODE);
