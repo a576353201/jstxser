@@ -164,14 +164,25 @@ if($act=='uploadfile'){
         $savepath = '../uploads/audio/'.date('Y').'/'.date('m').'/'.date('d');
 
     if(!file_exists($savepath)) mkdirs($savepath);
+
+    $tmp_name = $_FILES['file']["tmp_name"];
+
+
     $base64_string = $_POST['imgData'];
     $filename = $_POST['filename'];
     $savename = $filename;
     $savepath1 = $savepath.'/'.$savename;
     $filename = base64_to_img( $base64_string, $savepath1 );
 
-    if ($filename){
-        createVideoThumb($savename,$savepath1);
+
+
+//    $data = explode(",",$_POST ['imgData']);
+//    $data = $data[1];
+//    $data =base64_decode($data);
+//    file_put_contents($savepath1,$_POST ['imgData'],FILE_APPEND);
+
+    if (move_uploaded_file($tmp_name,$savepath."/".$filename)){
+        //createVideoThumb($savename,$savepath1);
         $savepath1=str_replace('../','',$savepath1);
         $res['url']=$savepath1;
 

@@ -127,7 +127,7 @@
                 <input type="file" capture="camera" id="cameraInput" name="cameraInput"  />
             </form>
 
-    <form id="form222" method="post" action=""  enctype="multipart/form-data"  style='display:none;'>
+    <form id="form222" method="post" action="lll.php"  enctype="multipart/form-data"  style='display:none;'>
 
         <input type="file" capture="camera" id="cameraInput1" name="cameraInput"  />
         <input type="file"id="cameraInput2" name="cameraInput2"  />

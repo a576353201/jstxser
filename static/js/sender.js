@@ -60,48 +60,36 @@ filechooser.onchange = function () {
     })
 };
 filechooser2.onchange = function () {
-    debugger
-
-    if (!this.files.length) return;
-
-    var files = Array.prototype.slice.call(this.files);
-    files.forEach(function (file, i) {
-
-       // if (!/\/(?:r|ogg)/i.test(file.type)) {   layer.msg("您选择的文件格式不正确1",{ type: 1, anim: 2 ,time:1000});;return;}
-        var reader = new FileReader();
-
-        reader.readAsDataURL(file);
-        var filename=file.name;
-//          获取图片大小
-        var size = file.size/1024 > 1024 ? (~~(20*file.size/1024/1024))/10 + "MB" :  ~~(file.size/1024) + "KB";
-        reader.filename = file.name;
 
 
-        reader.onload = function (e) {
+    var uploadFile = $("#cameraInput2")[0].files;
+    // 用表单来初始化
+    var formData = new FormData($("#form222")[0]);
+    if (uploadFile.length > 0) {
+        //获取上传的用户名
 
-            var result = this.result;
-            console.log(result)
-            if (result.length <= maxsize) {
 
-                var img = new Image();
-                //  document.querySelector('#group_avatar').src=result;
-                mid1='m' + Math.random().toString(36).substring(2);
-                var tempdata={sender_id:userid,msg_id:mid1,_mid:mid1,isloading:1,message:{type:'file',content:result},sender:{avatar:avatar,nickname:nickname}};
-                addone(tempdata);
-
-                upload_file(result, e.target.filename);
-                return;
-
+        $.ajax({
+            type: 'POST',
+            url:"../api/upload.php?act=uploadfile",
+            data:formData,
+            async: true,	// 默认是true，即为异步方式
+            cache: false,   //是否在缓存中读取数据的读取。(false 每次读取的是最新的数据)
+            contentType: false,	  // 告诉jQuery不要去设置Content-Type请求头
+            processData: false,   // 告诉jQuery不要去处理发送的数据
+            timeout: 0,	  //async必须设置为async:ture，timeout才生效；(默认的timeout为0，代表永不超时)
+            success:function(data){
+                alert("上传成功");
+            },
+            error:function(){
+                alert("未知的错误");
             }
-            else{
-                layer.msg("视频最大上传20MB！",{ type: 1, anim: 2 ,time:1000});
-                return false;
-            }
+        })
+    }else {
+        alert("选择的文件无效！请重新选择");
+    }
 
 
-        };
-        //reader.readAsDataURL(file);
-    })
 };
 
 filechooser1.onchange = function () {
