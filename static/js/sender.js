@@ -71,9 +71,13 @@ filechooser2.onchange = function () {
         var reader = new FileReader();
 
         reader.readAsDataURL(file);
+        var filename=file.name;
 //          获取图片大小
         var size = file.size/1024 > 1024 ? (~~(20*file.size/1024/1024))/10 + "MB" :  ~~(file.size/1024) + "KB";
-        reader.onload = function () {
+        reader.filename = file.name;
+
+
+        reader.onload = function (e) {
 
             var result = this.result;
             console.log(result)
@@ -85,7 +89,7 @@ filechooser2.onchange = function () {
                 var tempdata={sender_id:userid,msg_id:mid1,_mid:mid1,isloading:1,message:{type:'file',content:result},sender:{avatar:avatar,nickname:nickname}};
                 addone(tempdata);
 
-                upload_file(result);
+                upload_file(result, e.target.filename);
                 return;
 
             }
@@ -214,13 +218,13 @@ function upload_video(basestr) {
 }
 
 
-function upload_file(basestr) {
+function upload_file(basestr,filename){
     var base64Data = basestr.substr(22);
     //在前端截取22位之后的字符串作为图像数据
     //开始异步上
 
     isloading=1;
-    $.post("../api/upload.php?act=uploadfile", { group_id:group_id,"imgData": base64Data }, function (data, status) {
+    $.post("../api/upload.php?act=uploadfile", { group_id:group_id,filename:filename,"imgData": base64Data }, function (data, status) {
 
         isloading=0;
         if(data.code==200){

@@ -52,7 +52,7 @@ if($act=='uploadImage'){
 }
 //上传声音
 
-if($act=='uploadFile'){
+if($act=='uploadfile11'){
 
     if($_GET['dir']){
 
@@ -154,7 +154,7 @@ if($act=='uploadVedio1'){
     exit(json_encode($res));
 }
 
-if($act=='uploadfile22'){
+if($act=='uploadfile'){
 
     if($_GET['dir']){
 
@@ -165,7 +165,8 @@ if($act=='uploadfile22'){
 
     if(!file_exists($savepath)) mkdirs($savepath);
     $base64_string = $_POST['imgData'];
-    $savename = uniqid().'.mp4';
+    $filename = $_POST['filename'];
+    $savename = $filename;
     $savepath1 = $savepath.'/'.$savename;
     $filename = base64_to_img( $base64_string, $savepath1 );
 
